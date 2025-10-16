@@ -58,3 +58,6 @@
 [submodule "plugins/valve-internal-enabler"]
 	path = plugins/valve-internal-enabler
 	url = https://github.com/veygax/valve-internal-enabler
+[submodule "plugins/Millennium-apps-buttons"]
+	path = plugins/Millennium-apps-buttons
+	url = https://github.com/diemonic1/Millennium-apps-buttons
