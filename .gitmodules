@@ -61,6 +61,3 @@
 [submodule "plugins/Apps-buttons"]
 	path = plugins/Apps-buttons
 	url = https://github.com/diemonic1/Apps-buttons
-[submodule "plugins/apps-buttons"]
-	path = plugins/apps-buttons
-	url = https://github.com/diemonic1/Apps-buttons
