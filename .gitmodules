@@ -58,10 +58,6 @@
 [submodule "plugins/valve-internal-enabler"]
 	path = plugins/valve-internal-enabler
 	url = https://github.com/veygax/valve-internal-enabler
-[submodule "plugins/apps-buttons"]
-	path = plugins/apps-buttons
-	url = https://github.com/diemonic1/Apps-buttons
 [submodule "plugins/rss-feed-in-whats-new"]
 	path = plugins/rss-feed-in-whats-new
 	url = https://github.com/diemonic1/RSS-feed-in-whats-new
-
