@@ -58,3 +58,6 @@
 [submodule "plugins/valve-internal-enabler"]
 	path = plugins/valve-internal-enabler
 	url = https://github.com/veygax/valve-internal-enabler
+[submodule "plugins/GetTheBestPrice"]
+	path = plugins/GetTheBestPrice
+	url = https://github.com/LionEmpire/GetTheBestPrice
