@@ -64,3 +64,6 @@
 [submodule "plugins/steam-change-window-params"]
 	path = plugins/steam-change-window-params
 	url = https://github.com/ricewind012/steam-change-window-params
+[submodule "plugins/Apps-buttons"]
+	path = plugins/Apps-buttons
+	url = https://github.com/diemonic1/Apps-buttons
