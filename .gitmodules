@@ -64,3 +64,6 @@
 [submodule "plugins/steam-change-window-params"]
 	path = plugins/steam-change-window-params
 	url = https://github.com/ricewind012/steam-change-window-params
+[submodule "plugins/audio-loader"]
+	path = plugins/audio-loader
+	url = https://github.com/RomanMiray/Audio-Loader
