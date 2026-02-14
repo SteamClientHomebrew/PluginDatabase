@@ -58,12 +58,24 @@
 [submodule "plugins/valve-internal-enabler"]
 	path = plugins/valve-internal-enabler
 	url = https://github.com/veygax/valve-internal-enabler
+[submodule "plugins/dotastats"]
+	path = plugins/dotastats
+	url = https://github.com/BambooFury/Dota-Stats.git
 [submodule "plugins/hltb-millennium-plugin"]
 	path = plugins/hltb-millennium-plugin
 	url = https://github.com/jcdoll/hltb-millennium-plugin
 [submodule "plugins/steam-change-window-params"]
 	path = plugins/steam-change-window-params
 	url = https://github.com/ricewind012/steam-change-window-params
-[submodule "plugins/Apps-buttons"]
-	path = plugins/Apps-buttons
-	url = https://github.com/diemonic1/Apps-buttons
+[submodule "plugins/RSS-feed-in-whats-new"]
+	path = plugins/RSS-feed-in-whats-new
+	url = https://github.com/diemonic1/RSS-feed-in-whats-new
+[submodule "plugins/steam-global-launch-options"]
+	path = plugins/steam-global-launch-options
+	url = https://github.com/BlafKing/steam-global-launch-options.git
+[submodule "plugins/size-on-disk"]
+	path = plugins/size-on-disk
+	url = https://github.com/k0d13/steam-size-on-disk
+[submodule "plugins/gratitude"]
+	path = plugins/gratitude
+	url = https://github.com/BlythT/Gratitude-Millennium-Plugin

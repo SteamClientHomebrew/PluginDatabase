@@ -63,6 +63,14 @@ jobs:
 
           echo "submodule-matrix=$(cat submodules.json)" >> $GITHUB_OUTPUT
 
+      - name: Update README stats
+        run: |
+          STAT_OUTPUT=$(bash ./scripts/_stat.sh)
+
+          # Replace everything from "## Repository Manifest" to end of file
+          BEFORE=$(sed '/^## Repository Manifest$/,$d' README.md)
+          printf '%s\n%s\n' "$BEFORE" "$STAT_OUTPUT" > README.md
+
       - name: Commit Metadata
         if: github.event_name != 'pull_request' && github.event.repository.fork == false
         run: |
@@ -70,7 +78,7 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
           # Stage the changes
-          git add metadata.json
+          git add metadata.json README.md
 
           # Commit only if there are changes
           if git commit -m "chore: Add plugin metadata"; then

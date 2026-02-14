@@ -21,11 +21,11 @@ done
 log_message() {
   local level="$1"
   local message="$2"
-  
+
   if [ "$SILENT" = true ] && [[ "$level" = "warning" || "$level" = "notice" ]]; then
     level="debug"
   fi
-  
+
   echo "::$level::$message"
 }
 
@@ -39,7 +39,7 @@ cp "PLUGIN.md" dist/README.md 2>/dev/null || cp "README.md" dist/README.md 2>/de
 BACKEND_DIR=$(jq -r '.backend' plugin.json)
 if [ "$BACKEND_DIR" != "null" ]; then
   cp -r "$BACKEND_DIR" ./dist/"$BACKEND_DIR"
-else 
+else
   cp -r "backend" ./dist/backend 2>/dev/null || log_message "warning" "backend directory not found, skipping."
 fi
 
@@ -56,7 +56,9 @@ else
 fi
 
 log_message "notice" "Computing plugin metadata..."
-echo "{\"commit\": \"$(git rev-parse HEAD)\", \"id\": \"$(git rev-list --max-parents=0 HEAD)\"}" > dist/metadata.json
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/get-plugin-id.sh"
+echo "{\"commit\": \"$(git rev-parse HEAD)\", \"id\": \"$(get_plugin_id)\"}" > dist/metadata.json
 
 PLUGIN_NAME=$(jq -r '.name' plugin.json) || { log_message "error" "name not found in plugin.json"; exit 1; }
 echo "PLUGIN_NAME=$PLUGIN_NAME" >> $GITHUB_ENV
