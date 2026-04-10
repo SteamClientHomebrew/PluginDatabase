@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "cs-rep-plugin"]
+	path = cs-rep-plugin
+	url = https://github.com/christiangrothaus/cs-rep-plugin
