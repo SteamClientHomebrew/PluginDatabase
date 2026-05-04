@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/SteamWindowsToastNotify"]
+	path = plugins/SteamWindowsToastNotify
+	url = https://github.com/GID0317/SteamWindowsToastNotify.git
