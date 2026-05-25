@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/steam-rating"]
+	path = plugins/steam-rating
+	url = https://github.com/zoombrzoom/steam-rating.git
