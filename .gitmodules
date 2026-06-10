@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/hide-achievements"]
+	path = plugins/hide-achievements
+	url = https://github.com/lugia19/HideAchievements.git
