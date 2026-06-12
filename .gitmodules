@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/launch-options-manager"]
+	path = plugins/launch-options-manager
+	url = https://github.com/kapuchai/launch-options-manager
