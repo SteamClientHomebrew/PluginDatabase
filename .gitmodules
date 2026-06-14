@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/whats-new-rss-ticker"]
+	path = plugins/whats-new-rss-ticker
+	url = https://github.com/CasketPizza/Steam_Whats_New_Ticker.git
