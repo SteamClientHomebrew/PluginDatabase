@@ -76,3 +76,6 @@
 [submodule "plugins/library-iq"]
 	path = plugins/library-iq
 	url = https://github.com/wadforth/LibraryIQ.git
+[submodule "plugins/ggdeals-millenium"]
+	path = plugins/ggdeals-millenium
+	url = https://github.com/wadforth/ggdeals-millenium.git
