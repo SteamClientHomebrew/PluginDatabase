@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/playercount-badge"]
+	path = plugins/playercount-badge
+	url = https://github.com/swindlesmccoop/playercount-badge
