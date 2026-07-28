@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/hizsearch"]
+	path = plugins/hizsearch
+	url = https://github.com/hiz0147/HizSearch-Millennium
