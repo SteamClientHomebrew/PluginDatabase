@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "steam-win-notify"]
+	path = steam-win-notify
+	url = https://github.com/SnakyWarrior/steam-win-notify
