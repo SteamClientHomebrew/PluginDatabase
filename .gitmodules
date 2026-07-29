@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/instant-gaming"]
+	path = plugins/instant-gaming
+	url = https://github.com/Veky121/Instnat-Gaming-Millennium-Plugin
