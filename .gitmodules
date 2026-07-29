@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/game-data-linker"]
+	path = plugins/game-data-linker
+	url = https://github.com/retrotoolsdev-wq/game-data-linker
