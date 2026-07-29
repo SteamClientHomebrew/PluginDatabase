@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/steam-availability-deals-hub"]
+	path = plugins/steam-availability-deals-hub
+	url = https://github.com/johnnydan5599/steam-availability-deals-hub
