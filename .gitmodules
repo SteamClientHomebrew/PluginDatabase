@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/r6-stats"]
+	path = plugins/r6-stats
+	url = https://github.com/Nazza1996/Millennium-R6-Tracker
