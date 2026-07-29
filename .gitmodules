@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/protondb-status"]
+	path = plugins/protondb-status
+	url = https://github.com/nyakuoff/protondb-badge
