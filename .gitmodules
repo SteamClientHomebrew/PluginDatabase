@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/steam-completion-companion"]
+	path = plugins/steam-completion-companion
+	url = https://github.com/sondermusik/steam-completion-companion
