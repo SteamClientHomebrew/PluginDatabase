@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/steam-easygrid-linux"]
+	path = plugins/steam-easygrid-linux
+	url = https://github.com/j65zyj9ys4-sudo/steam-easygrid-linux.git
