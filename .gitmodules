@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/background_video"]
+	path = plugins/background_video
+	url = https://github.com/Jiniix806/BackgroundVideo.git
