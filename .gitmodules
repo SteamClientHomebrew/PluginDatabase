@@ -91,3 +91,6 @@
 [submodule "plugins/Easy-Restart-Reload-for-Steam"]
 	path = plugins/Easy-Restart-Reload-for-Steam
 	url = https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam
+[submodule "plugins/recent-chats"]
+	path = plugins/recent-chats
+	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
