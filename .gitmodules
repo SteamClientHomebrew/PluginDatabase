@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/steam-pinyin-search"]
+	path = plugins/steam-pinyin-search
+	url = https://github.com/simonheard/steam-pinyin-search.git
