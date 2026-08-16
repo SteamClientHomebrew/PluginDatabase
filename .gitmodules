@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/profile-button-config"]
+	path = plugins/profile-button-config
+	url = https://github.com/TOR968/profile-button-config
