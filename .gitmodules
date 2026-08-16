@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/steam-proton-universal"]
+	path = plugins/steam-proton-universal
+	url = https://github.com/BlafKing/steam-proton-universal
