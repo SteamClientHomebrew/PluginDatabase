@@ -85,3 +85,6 @@
 [submodule "plugins/steam-share"]
 	path = plugins/steam-share
 	url = https://github.com/wopln/Steam-Share
+[submodule "plugins/steam-info-for-nonsteam"]
+	path = plugins/steam-info-for-nonsteam
+	url = https://github.com/QofWands/steam-info-for-nonsteam.git
