@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/cs2tracker-extension"]
+	path = plugins/cs2tracker-extension
+	url = https://github.com/MuhammedResulBilkil/cs2tracker-extension
