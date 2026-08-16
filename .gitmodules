@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/ruststats-extension"]
+	path = plugins/ruststats-extension
+	url = https://github.com/TOR968/ruststats-extension
