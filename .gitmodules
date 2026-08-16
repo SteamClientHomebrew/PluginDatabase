@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/csst-at-extension"]
+	path = plugins/csst-at-extension
+	url = https://github.com/TOR968/csst-at-extension
