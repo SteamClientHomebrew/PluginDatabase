@@ -73,3 +73,6 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/millenium-non-steam-store-link-button"]
+	path = plugins/millenium-non-steam-store-link-button
+	url = https://github.com/eiztee/millenium-non-steam-store-link-button
