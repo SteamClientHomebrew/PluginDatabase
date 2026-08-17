@@ -52,9 +52,6 @@
 [submodule "plugins/valve-internal-enabler"]
 	path = plugins/valve-internal-enabler
 	url = https://github.com/veygax/valve-internal-enabler
-[submodule "plugins/dotastats"]
-	path = plugins/dotastats
-	url = https://github.com/BambooFury/Dota-Stats.git
 [submodule "plugins/hltb-millennium-plugin"]
 	path = plugins/hltb-millennium-plugin
 	url = https://github.com/jcdoll/hltb-millennium-plugin
