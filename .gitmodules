@@ -76,3 +76,21 @@
 [submodule "plugins/date-added"]
 	path = plugins/date-added
 	url = https://github.com/Norphirion/date-added
+[submodule "plugins/cs2-profile-stats"]
+	path = plugins/cs2-profile-stats
+	url = https://github.com/Shightrox/millennium-cs2-profile-stats.git
+[submodule "plugins/Steam-GameRenamer-Plugin"]
+	path = plugins/Steam-GameRenamer-Plugin
+	url = https://github.com/Inceptofn/Steam-GameRenamer-Plugin
+[submodule "plugins/protondb"]
+	path = plugins/protondb
+	url = https://github.com/unicxrn/protondb-millennium
+[submodule "plugins/millennium-uwp-library-sync"]
+	path = plugins/millennium-uwp-library-sync
+	url = https://github.com/xwxfox/millennium-uwp-library-sync
+[submodule "plugins/steam-share"]
+	path = plugins/steam-share
+	url = https://github.com/wopln/Steam-Share
+[submodule "plugins/Easy-Restart-Reload-for-Steam"]
+	path = plugins/Easy-Restart-Reload-for-Steam
+	url = https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam
