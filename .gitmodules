@@ -91,3 +91,6 @@
 [submodule "plugins/Easy-Restart-Reload-for-Steam"]
 	path = plugins/Easy-Restart-Reload-for-Steam
 	url = https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam
+[submodule "plugins/steam-currency-to-rub"]
+	path = plugins/steam-currency-to-rub
+	url = https://github.com/Jidos86/steam-currency-to-rub
