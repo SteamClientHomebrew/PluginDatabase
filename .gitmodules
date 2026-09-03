@@ -91,3 +91,6 @@
 [submodule "plugins/Easy-Restart-Reload-for-Steam"]
 	path = plugins/Easy-Restart-Reload-for-Steam
 	url = https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam
+[submodule "plugins/steam-autoplay-mute"]
+	path = plugins/steam-autoplay-mute
+	url = https://github.com/SnowFallinSummer/Steam-Autoplay-Mute.git
