@@ -73,6 +73,9 @@
 [submodule "plugins/gratitude"]
 	path = plugins/gratitude
 	url = https://github.com/BlythT/Gratitude-Millennium-Plugin
+[submodule "plugins/exclude-collections-in-collection"]
+	path = plugins/exclude-collections-in-collection
+	url = https://github.com/Norphirion/exclude-collections-in-collection
 [submodule "plugins/cs2-profile-stats"]
 	path = plugins/cs2-profile-stats
 	url = https://github.com/Shightrox/millennium-cs2-profile-stats.git
