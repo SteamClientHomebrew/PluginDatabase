@@ -1,4 +1,10 @@
 <!--  
+  📢 UPDATING AN EXISTING PLUGIN INSTEAD?
+  Please use the update template:
+  - Copy the template content from: .github/PULL_REQUEST_TEMPLATE/PLUGIN-UPDATE.md
+  - Or create the PR using this URL: https://github.com/SteamClientHomebrew/PluginDatabase/compare?expand=1&template=PLUGIN-UPDATE.md
+-->
+<!--  
   📌 **Before You Submit: Please Read Carefully**
 
   This template is **only** for submitting a **new plugin** to the store.  
