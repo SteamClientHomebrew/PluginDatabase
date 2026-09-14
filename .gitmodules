@@ -91,3 +91,12 @@
 [submodule "plugins/Easy-Restart-Reload-for-Steam"]
 	path = plugins/Easy-Restart-Reload-for-Steam
 	url = https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam
+[submodule "plugins/steam-review-bar"]
+	path = plugins/steam-review-bar
+	url = https://github.com/SnowFallinSummer/Steam-Review-Bar.git
+[submodule "plugins/steam-autoplay-mute"]
+	path = plugins/steam-autoplay-mute
+	url = https://github.com/SnowFallinSummer/Steam-Autoplay-Mute.git
+[submodule "plugins/steam-hoverless"]
+	path = plugins/steam-hoverless
+	url = https://github.com/SnowFallinSummer/steam-hoverless.git
