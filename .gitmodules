@@ -91,3 +91,6 @@
 [submodule "plugins/Easy-Restart-Reload-for-Steam"]
 	path = plugins/Easy-Restart-Reload-for-Steam
 	url = https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam
+[submodule "plugins/steam-wrapped"]
+	path = plugins/steam-wrapped
+	url = https://github.com/wopln/Steam-Wrapped.git
