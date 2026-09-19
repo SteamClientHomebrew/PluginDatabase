@@ -91,3 +91,6 @@
 [submodule "plugins/Easy-Restart-Reload-for-Steam"]
 	path = plugins/Easy-Restart-Reload-for-Steam
 	url = https://github.com/SaiyajinK/Easy-Restart-Reload-for-Steam
+[submodule "plugins/sort-as-display"]
+	path = plugins/sort-as-display
+	url = https://github.com/kuusei/steam-sort-as-display.git
