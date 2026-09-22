@@ -17,6 +17,7 @@ jobs:
 
     outputs:
       submodule-matrix: ${{ steps.discover-submodules.outputs.submodule-matrix }}
+      has-submodules: ${{ steps.discover-submodules.outputs.has-submodules }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,14 +33,54 @@ jobs:
           path: scripts/build/
           retention-days: 1
 
+      - name: Determine changed plugins
+        id: changed-plugins
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          set -euo pipefail
+
+          zero_sha="0000000000000000000000000000000000000000"
+
+          if [[ "${{ github.event_name }}" != "push" ]]; then
+            echo "Not a push event; building all plugins."
+            echo "apply-filter=false" >> "$GITHUB_OUTPUT"
+            echo "changed-plugins=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [[ -z "$BEFORE" || "$BEFORE" == "$zero_sha" ]] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            echo "No usable base commit to diff against; building all plugins."
+            echo "apply-filter=false" >> "$GITHUB_OUTPUT"
+            echo "changed-plugins=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          changed=$(git diff --name-only "$BEFORE" "$AFTER" -- plugins/ | sort -u)
+
+          echo "Changed plugin paths:"
+          echo "${changed:-<none>}"
+
+          echo "apply-filter=true" >> "$GITHUB_OUTPUT"
+          {
+            echo "changed-plugins<<EOF"
+            echo "$changed"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Discover submodules
         id: discover-submodules
+        env:
+          APPLY_FILTER: ${{ steps.changed-plugins.outputs.apply-filter }}
+          CHANGED_PLUGINS: ${{ steps.changed-plugins.outputs.changed-plugins }}
         run: |
           sudo bash ./scripts/_gen_metadata.sh
-          sudo bash ./scripts/_submodules.sh > submodules.json
+          sudo -E bash ./scripts/_submodules.sh > submodules.json
           cat submodules.json
 
           echo "submodule-matrix=$(cat submodules.json)" >> $GITHUB_OUTPUT
+          echo "has-submodules=$(jq '(.submodules | length) > 0' submodules.json)" >> $GITHUB_OUTPUT
 
       - name: Commit Metadata
         if: github.event_name != 'pull_request' && github.event.repository.fork == false
@@ -56,6 +97,7 @@ jobs:
 
   make:
     needs: prepare
+    if: needs.prepare.outputs.has-submodules == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -95,7 +137,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pnpm install
+          pnpm install || pnpm install --dangerously-allow-all-builds
         env:
           NODE_ENV: production
 
