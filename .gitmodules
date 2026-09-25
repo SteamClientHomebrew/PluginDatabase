@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/steambackdrop"]
+	path = plugins/steambackdrop
+	url = https://github.com/asdfghjkl060723/SteamBackdrop
