@@ -1,0 +1,68 @@
+name: PR Build Gate
+
+on:
+  workflow_run:
+    workflows: ["Test Build"]
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "Pull request number to close"
+        required: true
+        type: number
+
+jobs:
+  handle-failed-build:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'failure')
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Resolve pull request number
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+          INPUT_PR: ${{ github.event.inputs.pr_number }}
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            number="$INPUT_PR"
+          else
+            number=$(gh api "search/issues?q=repo:$REPO+$SHA" --jq '.items[0].number // empty')
+          fi
+
+          if [[ -z "$number" ]]; then
+            echo "Could not resolve a pull request number" >&2
+            exit 1
+          fi
+
+          echo "number=$number" >> "$GITHUB_OUTPUT"
+
+      - name: Comment and close the pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          set -euo pipefail
+
+          state=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json state --jq '.state')
+
+          if [[ "$state" != "OPEN" ]]; then
+            echo "Pull request #$PR_NUMBER is not open (state: $state); nothing to do."
+            exit 0
+          fi
+
+          if [[ -z "$RUN_URL" ]]; then
+            RUN_URL="https://github.com/$REPO/pull/$PR_NUMBER/checks"
+          fi
+
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "This pull request was closed because the plugin failed to build. See the [build log]($RUN_URL) for details. Fix the issue and reopen this pull request to retry the build."
+          gh pr close "$PR_NUMBER" --repo "$REPO"
