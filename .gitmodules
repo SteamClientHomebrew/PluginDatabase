@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/cs2tracker-extension"]
+	path = plugins/cs2tracker-extension
+	url = https://github.com/MuhammedResulBilkil/cs2tracker-extension
