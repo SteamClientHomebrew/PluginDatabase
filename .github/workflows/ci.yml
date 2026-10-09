@@ -17,6 +17,7 @@ jobs:
 
     outputs:
       submodule-matrix: ${{ steps.discover-submodules.outputs.submodule-matrix }}
+      has-submodules: ${{ steps.discover-submodules.outputs.has-submodules }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,28 +26,6 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
-      - name: Install Database SDK
-        id: install-db-sdk
-        run: |
-          sudo apt-get update
-          sudo apt-get install apt-transport-https ca-certificates gnupg curl
-          curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
-          echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-          sudo apt-get update && sudo apt-get install google-cloud-cli
-
-          # Create a directory to cache the SDK installation
-          mkdir -p ~/.google-cloud-sdk
-          cp -r /usr/lib/google-cloud-sdk/* ~/.google-cloud-sdk/
-          echo "sdk-path=$(realpath ~/.google-cloud-sdk)" >> $GITHUB_OUTPUT
-
-      - name: Cache Database SDK
-        uses: actions/cache@v3
-        with:
-          path: ~/.google-cloud-sdk
-          key: ${{ runner.os }}-google-cloud-sdk-${{ hashFiles('**/google-cloud-sdk/**') }}
-          restore-keys: |
-            ${{ runner.os }}-google-cloud-sdk-
-
       - name: Upload Build Scripts
         uses: actions/upload-artifact@v4
         with:
@@ -54,35 +33,63 @@ jobs:
           path: scripts/build/
           retention-days: 1
 
+      - name: Determine changed plugins
+        id: changed-plugins
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+        run: |
+          set -euo pipefail
+
+          zero_sha="0000000000000000000000000000000000000000"
+
+          if [[ "${{ github.event_name }}" != "push" ]]; then
+            echo "Not a push event; building all plugins."
+            echo "apply-filter=false" >> "$GITHUB_OUTPUT"
+            echo "changed-plugins=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [[ -z "$BEFORE" || "$BEFORE" == "$zero_sha" ]] || ! git cat-file -e "$BEFORE" 2>/dev/null; then
+            echo "No usable base commit to diff against; building all plugins."
+            echo "apply-filter=false" >> "$GITHUB_OUTPUT"
+            echo "changed-plugins=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          changed=$(git diff --name-only "$BEFORE" "$AFTER" -- plugins/ | sort -u)
+
+          echo "Changed plugin paths:"
+          echo "${changed:-<none>}"
+
+          echo "apply-filter=true" >> "$GITHUB_OUTPUT"
+          {
+            echo "changed-plugins<<EOF"
+            echo "$changed"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Discover submodules
         id: discover-submodules
+        env:
+          APPLY_FILTER: ${{ steps.changed-plugins.outputs.apply-filter }}
+          CHANGED_PLUGINS: ${{ steps.changed-plugins.outputs.changed-plugins }}
         run: |
           sudo bash ./scripts/_gen_metadata.sh
-          sudo bash ./scripts/_submodules.sh > submodules.json
+          sudo -E bash ./scripts/_submodules.sh > submodules.json
           cat submodules.json
 
           echo "submodule-matrix=$(cat submodules.json)" >> $GITHUB_OUTPUT
-
-      - name: Update README stats
-        run: |
-          STAT_OUTPUT=$(bash ./scripts/_stat.sh)
-
-          # Replace everything from "## Repository Manifest" to end of file
-          BEFORE=$(sed '/^## Repository Manifest$/,$d' README.md)
-          printf '%s\n%s\n' "$BEFORE" "$STAT_OUTPUT" > README.md
+          echo "has-submodules=$(jq '(.submodules | length) > 0' submodules.json)" >> $GITHUB_OUTPUT
 
       - name: Commit Metadata
         if: github.event_name != 'pull_request' && github.event.repository.fork == false
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add metadata.json
 
-          # Stage the changes
-          git add metadata.json README.md
-
-          # Commit only if there are changes
           if git commit -m "chore: Add plugin metadata"; then
-            # Push only if the commit succeeded
             git push
           else
             echo "::debug::No changes to commit."
@@ -90,6 +97,7 @@ jobs:
 
   make:
     needs: prepare
+    if: needs.prepare.outputs.has-submodules == 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -105,31 +113,27 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Detect plugin format
+        id: format
+        run: |
+          if [ -f millennium.toml ]; then
+            echo "format=star" >> "$GITHUB_OUTPUT"
+          else
+            echo "format=loose" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "20"
 
-      - name: Restore Database SDK from Cache
-        uses: actions/cache@v3
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          path: ~/.google-cloud-sdk
-          key: ${{ runner.os }}-google-cloud-sdk-${{ hashFiles('**/google-cloud-sdk/**') }}
-          restore-keys: |
-            ${{ runner.os }}-google-cloud-sdk-
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Setup Database SDK Path
-        run: |
-          echo "PATH=$PATH:~/.google-cloud-sdk/bin" >> $GITHUB_ENV
-          gcloud --version
-
-      - name: Authenticate to Database
-        env:
-          GCP_SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-        run: |
-          echo "${GCP_SERVICE_ACCOUNT_KEY}" > gcloud-key.json
-          gcloud auth activate-service-account --key-file=gcloud-key.json
-          gcloud config set project steam-brew
+      - name: Add server to known hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Download Build Scripts
         uses: actions/download-artifact@v4
@@ -137,16 +141,23 @@ jobs:
           name: build-scripts
           path: scripts/build/
 
+      - name: Install starlight
+        if: steps.format.outputs.format == 'star'
+        run: npm install -g @steambrew/starlight@${{ vars.STARLIGHT_VERSION }}
+
       - name: Install pnpm
+        if: steps.format.outputs.format != 'star'
         run: npm install -g pnpm
 
       - name: Install Dependencies
+        if: steps.format.outputs.format != 'star'
         run: |
-          pnpm install
+          pnpm install || pnpm install --dangerously-allow-all-builds
         env:
           NODE_ENV: production
 
       - name: Build Plugin
+        if: steps.format.outputs.format != 'star'
         run: |
           pnpm run build
         env:
@@ -156,8 +167,16 @@ jobs:
         id: prepare-distribution
         run: bash ./scripts/build/prepare-dist.sh --silent
 
-      - name: Upload to database
+      - name: Sign star artifact
+        if: steps.format.outputs.format == 'star'
+        run: starlight sign dist/*.star
+        env:
+          STARLIGHT_SIGNING_KEY: ${{ secrets.STARLIGHT_SIGNING_KEY }}
+
+      - name: Upload to server
         run: bash ./scripts/build/upload-dist.sh ${{ env.PLUGIN_NAME }}
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
 
       - name: Upload Plugin Artifact
         uses: actions/upload-artifact@v4

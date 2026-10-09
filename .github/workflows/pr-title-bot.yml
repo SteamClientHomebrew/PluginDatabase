@@ -1,0 +1,135 @@
+name: PR Title Bot
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to rewrite (leave blank to process all open PRs)"
+        required: false
+        type: number
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      pr_numbers: ${{ steps.list.outputs.pr_numbers }}
+    steps:
+      - name: Determine target PRs
+        id: list
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          if [[ -n "${{ github.event.pull_request.number }}" ]]; then
+            numbers="[${{ github.event.pull_request.number }}]"
+          elif [[ -n "${{ inputs.pr_number }}" ]]; then
+            numbers="[${{ inputs.pr_number }}]"
+          else
+            numbers=$(gh pr list --repo "$REPO" --state open --limit 1000 --json number --jq '[.[].number]')
+          fi
+
+          echo "Targeting PRs: $numbers"
+          echo "pr_numbers=$numbers" >> "$GITHUB_OUTPUT"
+
+  rewrite:
+    needs: discover
+    if: needs.discover.outputs.pr_numbers != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pr_number: ${{ fromJson(needs.discover.outputs.pr_numbers) }}
+    concurrency:
+      group: pr-title-bot-${{ matrix.pr_number }}
+      cancel-in-progress: true
+    steps:
+      - name: Rewrite title and label from plugin diff
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ matrix.pr_number }}
+        run: |
+          set -euo pipefail
+
+          HEAD_SHA=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json headRefOid --jq '.headRefOid')
+
+          files=$(gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate \
+            --jq '.[] | select(.filename | startswith("plugins/")) | "\(.status)\t\(.filename)\t\(.sha)"')
+
+          if [[ -z "$files" ]]; then
+            echo "No plugin files changed; skipping."
+            exit 0
+          fi
+
+          plugin_paths=$(printf '%s\n' "$files" | cut -f2 | awk -F/ '{print $1"/"$2}' | sort -u)
+          plugin_count=$(printf '%s\n' "$plugin_paths" | grep -c .)
+
+          if [[ "$plugin_count" -ne 1 ]]; then
+            echo "PR touches $plugin_count plugin directories; skipping title rewrite."
+            exit 0
+          fi
+
+          plugin_path=$plugin_paths
+          line=$(printf '%s\n' "$files" | awk -F'\t' -v p="$plugin_path" '$2==p {print; exit}')
+          status=$(printf '%s' "$line" | cut -f1)
+          submodule_sha=$(printf '%s' "$line" | cut -f3)
+
+          case "$status" in
+            added)
+              verb="Add"
+              label="plugin-addition"
+              other_label="plugin-update"
+              ;;
+            modified)
+              verb="Update"
+              label="plugin-update"
+              other_label="plugin-addition"
+              ;;
+            *)
+              echo "Unhandled file status '$status' for $plugin_path; skipping."
+              exit 0
+              ;;
+          esac
+
+          submodule_url=$(gh api "repos/$REPO/contents/.gitmodules?ref=$HEAD_SHA" --jq '.content' | base64 -d \
+            | awk -v p="$plugin_path" '
+                $0 ~ ("\\[submodule \"" p "\"\\]") { found=1; next }
+                found && /^\[submodule/ { found=0 }
+                found && /url[ \t]*=/ { sub(/^[ \t]*url[ \t]*=[ \t]*/, ""); print; exit }
+              ')
+
+          if [[ -z "$submodule_url" ]]; then
+            echo "Could not resolve submodule URL for $plugin_path; skipping."
+            exit 0
+          fi
+
+          sub_repo=$(printf '%s' "$submodule_url" | tr -d '\r' | sed -E 's/[[:space:]]+$//' \
+            | sed -E 's#^https://github\.com/##' | sed -E 's#\.git$##' | sed -E 's#/$##')
+
+          common_name=$(gh api "repos/$sub_repo/contents/plugin.json?ref=$submodule_sha" --jq '.content' 2>/dev/null \
+            | base64 -d 2>/dev/null | jq -r '.common_name // empty' 2>/dev/null || true)
+
+          if [[ -z "$common_name" ]]; then
+            common_name=$(basename "$plugin_path" | sed -E 's/[-_]+/ /g' | sed -E 's/(^|[ ])([a-z])/\1\u\2/g')
+            echo "::warning::Could not read common_name from plugin.json for $sub_repo@$submodule_sha; falling back to '$common_name'."
+          fi
+
+          new_title="$verb $common_name"
+          current_title=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json title --jq '.title')
+
+          if [[ "$current_title" != "$new_title" ]]; then
+            gh pr edit "$PR_NUMBER" --repo "$REPO" --title "$new_title"
+          fi
+
+          gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label "$label" --remove-label "$other_label"

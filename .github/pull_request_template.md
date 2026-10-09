@@ -1,7 +1,13 @@
-<!--  
+<!--
+  📢 UPDATING AN EXISTING PLUGIN INSTEAD?
+  Please use the update template:
+  - Copy the template content from: .github/PULL_REQUEST_TEMPLATE/PLUGIN-UPDATE.md
+  - Or create the PR using this URL: https://github.com/SteamClientHomebrew/PluginDatabase/compare?expand=1&template=PLUGIN-UPDATE.md
+-->
+<!--
   📌 **Before You Submit: Please Read Carefully**
 
-  This template is **only** for submitting a **new plugin** to the store.  
+  This template is **only** for submitting a **new plugin** to the store.
   If you're doing anything else (e.g., updating a plugin), please start over and select the appropriate PR template.
 
   Make sure you have:
@@ -12,23 +18,23 @@
 
 # REPLACE_WITH_PLUGIN_NAME
 
-<!--  
-  Briefly describe what your plugin does.  
-  If relevant, include screenshots, videos, or comparisons to similar plugins.  
+<!--
+  Briefly describe what your plugin does.
+  If relevant, include screenshots, videos, or comparisons to similar plugins.
   If your plugin overlaps with existing ones, explain how it differs and why it adds value.
 -->
 
 REPLACE_WITH_SUMMARY
 
-
-
 ## Task Checklist
 
 ### Developer
 
+- [ ] My plugin complies with the [plugin submission guidelines](https://docs.steambrew.app/developers/submitting-plugins#guidelines)
 - [ ] I am the original author or an authorized maintainer of this plugin.
 - [ ] I have complied with all license requirements for the libraries used, including providing appropriate notices where necessary.
 - [ ] My plugin is fully open source and does not depend on any external paid services, except for widely trusted and well-known platforms. Additionally, neither I nor anyone associated with me profits from any such services.
+- [ ] Generative AI was used for most of the plugin's code.
 
 ### Plugin Functionality
 
@@ -37,14 +43,14 @@ REPLACE_WITH_SUMMARY
 
 ### Backend Configuration
 
-* **Yes/No**: I use a standard Millennium python backend in my plugin.
-* **Yes/No**: I use **custom binaries** that or rely on other FOSS projects that aren't written directly using Millennium's python backend. 
+- [ ] I use a standard Millennium Lua backend in my plugin.
+- [ ] I use **custom binaries** that or rely on other FOSS projects that aren't written directly using Millennium's Lua backend.
 
 ### Community Contribution
 
-<!--  
-  Link to your feedback on two plugin PRs in a comment on this PR.  
-  This step is optional but strongly encouraged — plugin PRs without testing contributions may be reviewed more slowly.  
+<!--
+  Link to your feedback on two plugin PRs in a comment on this PR.
+  This step is optional but strongly encouraged — plugin PRs without testing contributions may be reviewed more slowly.
 -->
 
 - [ ] I have tested and left feedback on **two** other plugin pull requests.
@@ -54,8 +60,8 @@ REPLACE_WITH_SUMMARY
 
 ## Testing Instructions
 
-<!--  
-  DO NOT CHECK THESE YOURSELF.  
+<!--
+  DO NOT CHECK THESE YOURSELF.
   A third-party tester will check the appropriate box below **after verifying** your plugin.
 -->
 

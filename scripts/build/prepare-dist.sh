@@ -29,6 +29,25 @@ log_message() {
   echo "::$level::$message"
 }
 
+if [ -f "millennium.toml" ]; then
+  mkdir -p dist
+
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  source "$SCRIPT_DIR/get-plugin-id.sh"
+  ID=$(get_plugin_id)
+  COMMIT=$(git rev-parse HEAD)
+
+  log_message "notice" "Packing starlight plugin..."
+  starlight pack -o dist --release --source-commit "$COMMIT" || { log_message "error" "starlight pack failed."; exit 1; }
+
+  echo "{\"commit\": \"$COMMIT\", \"id\": \"$ID\"}" > dist/metadata.json
+
+  echo "PLUGIN_NAME=$ID" >> "$GITHUB_ENV"
+
+  log_message "notice" "Successfully built starlight plugin."
+  exit 0
+fi
+
 mkdir -p dist
 
 cp -r ".millennium" dist/.millennium 2>/dev/null || { log_message "error" ".millennium directory not found, it is required to run the plugin."; exit 1; }

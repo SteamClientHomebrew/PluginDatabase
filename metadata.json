@@ -1,102 +1,182 @@
 [
   {
+    "id": "af2b8c89d682dce4d38b1c3a54cff28571f044d0",
+    "commitId": "dc79ae21c6a71af946fd71b5867eee1b179ea184",
+    "format": "loose"
+  },
+  {
     "id": "3dc714a7c1b13331bd0b9d13da3677f6e8ed6a64",
-    "commitId": "42f6e2c939f6938989cc4b6bdd4c4abc7c7acfeb"
+    "commitId": "dbce337c1e847021d8007f11d385254526e96766",
+    "format": "loose"
+  },
+  {
+    "id": "e078a596f3ce1e43188ce27815e6fe905620fa89",
+    "commitId": "f24a9eeeac350bf6ede9baa4af289e9d4d1cedef",
+    "format": "loose"
   },
   {
     "id": "13f2dcc363c8afc41a42ba5df62aef06db1cc600",
-    "commitId": "3662d0fa4f32a0b7d4151004cd241fe009b36f0d"
+    "commitId": "3662d0fa4f32a0b7d4151004cd241fe009b36f0d",
+    "format": "loose"
   },
   {
     "id": "23c7ecc10605f2134e748cf3592bee0b29da1a4b",
-    "commitId": "084d32b5947103aa36fec083db78b51fd80edd3b"
+    "commitId": "084d32b5947103aa36fec083db78b51fd80edd3b",
+    "format": "loose"
   },
   {
     "id": "dc691b7d877b297f38fcf51d9566fc05465b1412",
-    "commitId": "01471375c1ea2b57244a206edea73c3e322d2634"
+    "commitId": "01471375c1ea2b57244a206edea73c3e322d2634",
+    "format": "loose"
+  },
+  {
+    "id": "1013755aa494359031294639cb7e559a8a6c330e",
+    "commitId": "7e484ddb86ad4160d92106c2ad9a3e95faa97627",
+    "format": "loose"
   },
   {
     "id": "5a3b3a83840f13987d97e8af21b3ab96f9c1db78",
-    "commitId": "10a783d5c6d36843734c45bae67fa624828a8aae"
+    "commitId": "86dca7f0c6c76d3b7a1f9a912a1f663726374d9f",
+    "format": "loose"
   },
   {
     "id": "c0f9737e4a5b1b466e103a7d5d5ee3b4493e5685",
-    "commitId": "6d6387f3d2699cc1bc6c0e1ee99b612160745dba"
+    "commitId": "6d6387f3d2699cc1bc6c0e1ee99b612160745dba",
+    "format": "loose"
   },
   {
     "id": "f73f8fd41cdda33a5dbfd5ef37a0801f044a24b0",
-    "commitId": "59652cb0d7e7f2c5646a53adc006eccac1d75baa"
+    "commitId": "586a34da0c0c8cce1883c6d97b3208ae2eb1037b",
+    "format": "loose"
   },
   {
     "id": "b4c58634419beab7b23cae6eee2d4bef45b454b3",
-    "commitId": "28c1a17f533d0ae5e98745616e859548912898e0"
+    "commitId": "28c1a17f533d0ae5e98745616e859548912898e0",
+    "format": "loose"
   },
   {
     "id": "788ed8554492ebd2ebe057b8eff79fad8a6c75d5",
-    "commitId": "3f9ffb0cd9ada58a7de7f71b3ed8d094ca7130f6"
+    "commitId": "3f9ffb0cd9ada58a7de7f71b3ed8d094ca7130f6",
+    "format": "loose"
   },
   {
     "id": "84b2f76a6f1a5ef88a73145ee8805c1d499121ad",
-    "commitId": "a811555dafaef174a98e414098f4725d5ccaaa31"
+    "commitId": "a811555dafaef174a98e414098f4725d5ccaaa31",
+    "format": "loose"
   },
   {
     "id": "a0f319c49e93d7bba258b5ed96c858bdb57d8ad2",
-    "commitId": "1c38dca58fa3d36cd0d382376ed9afb3295430d0"
+    "commitId": "47fb9dcb58478e2f72e37a617d90b3e8645ee331",
+    "format": "loose"
   },
   {
     "id": "f685622bace6c63a70a24265f72fabd32aa497b5",
-    "commitId": "49d59edf7475ceef42734627687bdb71d7d08709"
+    "commitId": "7decc0a06bb26b365a779c9d1a85195834c940e1",
+    "format": "loose"
   },
   {
     "id": "ee88f1c520050f2f1320357fe535aa4045d9038e",
-    "commitId": "8601ec908d6400bc6adbf45ef8fb5a6ea52d5bbd"
+    "commitId": "80082ced08186ceeca7ab9fdcd388fe632b8c633",
+    "format": "loose"
   },
   {
     "id": "57c553750f616459005a996e765c6bc582a1e803",
-    "commitId": "3e55d6bb2275bace8d4e83087fb832919b83ef71"
+    "commitId": "3e55d6bb2275bace8d4e83087fb832919b83ef71",
+    "format": "loose"
+  },
+  {
+    "id": "776d257408ca64e1d3a8d6e7b8b6ea50656bfc5d",
+    "commitId": "d419ff8959a05af0602a1674de86ac6ed4cf0a03",
+    "format": "loose"
   },
   {
     "id": "02bed50d10a8b1e58fb8bba608fe6a120a3a0dca",
-    "commitId": "3d276fba62ec4920e03b344eb045e4b186944e54"
+    "commitId": "f2c14ecbc0cfcdff6bba5f1d703231ec6037588f",
+    "format": "loose"
+  },
+  {
+    "id": "a8c27aa008d9a0b6d638ea6a9c6bceab30da78ef",
+    "commitId": "9af7579b3a61ede809a090f4d5d095c2684688ed",
+    "format": "loose"
+  },
+  {
+    "id": "7913678dca9592b28d2f619aeefd47b06ebf36a2",
+    "commitId": "7913678dca9592b28d2f619aeefd47b06ebf36a2",
+    "format": "loose"
+  },
+  {
+    "id": "ef37f993bb3d7906f3424405c946802671cc3dee",
+    "commitId": "3e3ea9402a1f729e629270afdcc481c12f31bb42",
+    "format": "loose"
+  },
+  {
+    "id": "46f038e119b8f1a83fc51113c4339a1fc8c56cbd",
+    "commitId": "b8c8b430d1df1ca90285af354d369b5cdb45131c",
+    "format": "loose"
+  },
+  {
+    "id": "702184fff38e37ad4e5e4a9f00aecf1dedb03917",
+    "commitId": "37eed4d594eea5986839738a79a3bcda0a59b365",
+    "format": "loose"
   },
   {
     "id": "e73371b61eef68019413475b7642ecc37e53bbbd",
-    "commitId": "e73371b61eef68019413475b7642ecc37e53bbbd"
+    "commitId": "35ee6ab7a221429766ddafcee4d7a2a288246ecc",
+    "format": "loose"
+  },
+  {
+    "id": "3ea0f87035a70a293f4cb16ff99517cb7a6e57b3",
+    "commitId": "d6a286c51cdbb10765606d0e92fb35b3e14216fa",
+    "format": "loose"
   },
   {
     "id": "aca2451aea1d2bc5e5df9a2b8bb3d1b6a8f3fa8b",
-    "commitId": "8214f3641be641610e8237f9e14a21fdcbb4a735"
+    "commitId": "8214f3641be641610e8237f9e14a21fdcbb4a735",
+    "format": "loose"
   },
   {
     "id": "70961284c21341e34d5c7b553cadaf2e3b5de9d6",
-    "commitId": "ee57e92f9fe4f058082f8eb35b8ccbb2437cf4be"
+    "commitId": "ee57e92f9fe4f058082f8eb35b8ccbb2437cf4be",
+    "format": "loose"
   },
   {
     "id": "a8f305c0bcdbe3b7fd473d2f59c4e8b8b067c648",
-    "commitId": "939e4ede5005fd80c924ee763937034c6838e570"
+    "commitId": "b5ab1f267a9a148f5c4c7a0e94263a6886c0af2a",
+    "format": "loose"
   },
   {
     "id": "2519c8a9fc979627a214a78ad642ae5d5723216f",
-    "commitId": "3bf0cea2bbff98dfa63f56ba4b9be34e432a8c4f"
+    "commitId": "3be3c47ec244d722393be79a6868c35688672c22",
+    "format": "loose"
   },
   {
     "id": "ade101371bfd58fb3de4c28d7f60b343325cc19d",
-    "commitId": "0043e8ccf244739c18023be80a48509b6c8afade"
+    "commitId": "0043e8ccf244739c18023be80a48509b6c8afade",
+    "format": "loose"
   },
   {
     "id": "266c815057f2fae7249dafe9f80e10d27e89806e",
-    "commitId": "34c8a1d24fde69b01411c5bf997e2e1cf17948e1"
+    "commitId": "c9e5974ad242a6ac0f4918eb0583877f6ea6431c",
+    "format": "loose"
   },
   {
     "id": "113d5b98ee24ae7fefcb7162c6114528547c7dd6",
-    "commitId": "5d6ab8206cbedc0a408e72fca6592bf21c91a68c"
+    "commitId": "d9261ed33b8b18a6db6aadabbf9af32f42e35da1",
+    "format": "loose"
+  },
+  {
+    "id": "5c511070dfca58fe2df36f7ffb87b52abee28970",
+    "commitId": "fe22a68ff5184a93a101e5832aa2c91b38486043",
+    "format": "loose"
   },
   {
     "id": "749950a94c53e3ef11bc77358a23c916cb44f4f5",
-    "commitId": "d1e049929edc16beb776f2ad3b27a8a71aebe6d0"
+    "commitId": "56678fd10dba9826d34fcf8e6630fe1c099360e1",
+    "format": "loose"
   },
   {
     "id": "a8d02beed07d8567ecd3a2f84b1ced3dbf7b0506",
-    "commitId": "e83934d658283d1db32a06567b024dd876dd8f53"
+    "commitId": "e83934d658283d1db32a06567b024dd876dd8f53",
+    "format": "loose"
   }
 ]
