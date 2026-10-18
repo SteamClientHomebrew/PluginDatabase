@@ -113,6 +113,15 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Detect plugin format
+        id: format
+        run: |
+          if [ -f millennium.toml ]; then
+            echo "format=star" >> "$GITHUB_OUTPUT"
+          else
+            echo "format=loose" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -132,16 +141,23 @@ jobs:
           name: build-scripts
           path: scripts/build/
 
+      - name: Install starlight
+        if: steps.format.outputs.format == 'star'
+        run: npm install -g @steambrew/starlight@${{ vars.STARLIGHT_VERSION }}
+
       - name: Install pnpm
+        if: steps.format.outputs.format != 'star'
         run: npm install -g pnpm
 
       - name: Install Dependencies
+        if: steps.format.outputs.format != 'star'
         run: |
-          pnpm install
+          pnpm install || pnpm install --dangerously-allow-all-builds
         env:
           NODE_ENV: production
 
       - name: Build Plugin
+        if: steps.format.outputs.format != 'star'
         run: |
           pnpm run build
         env:
@@ -150,6 +166,12 @@ jobs:
       - name: Prepare Distribution Files
         id: prepare-distribution
         run: bash ./scripts/build/prepare-dist.sh --silent
+
+      - name: Sign star artifact
+        if: steps.format.outputs.format == 'star'
+        run: starlight sign dist/*.star
+        env:
+          STARLIGHT_SIGNING_KEY: ${{ secrets.STARLIGHT_SIGNING_KEY }}
 
       - name: Upload to server
         run: bash ./scripts/build/upload-dist.sh ${{ env.PLUGIN_NAME }}

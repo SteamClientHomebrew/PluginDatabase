@@ -1,4 +1,3 @@
-
 # PluginDatabase
 
 [Home Page](https://steambrew.app/) • [Discord](https://steambrew.app/discord) • [Documentation](https://docs.steambrew.app/)
@@ -30,4 +29,5 @@ Then open a pull request with that commit.
 To clone all plugins at their pinned commits after a fresh checkout, run `git submodule update --init`.
 
 [^1]: Submitting A Plugin
+
 [^2]: Updating Your Plugin
