@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/steam-captured-activity"]
+	path = plugins/steam-captured-activity
+	url = https://github.com/gunCannoli/steam-captured-activity
