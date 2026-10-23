@@ -103,6 +103,9 @@
 [submodule "plugins/protondb-library-badges"]
 	path = plugins/protondb-library-badges
 	url = https://github.com/Yohlo/protondb-library-badges
+[submodule "plugins/NicePrice"]
+	path = plugins/NicePrice
+	url = https://github.com/MathisBls/NicePrice
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
