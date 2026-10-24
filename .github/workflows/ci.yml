@@ -76,7 +76,7 @@ jobs:
           CHANGED_PLUGINS: ${{ steps.changed-plugins.outputs.changed-plugins }}
         run: |
           sudo bash ./scripts/_gen_metadata.sh
-          sudo -E bash ./scripts/_submodules.sh > submodules.json
+          sudo bash ./scripts/_submodules.sh "$APPLY_FILTER" "$CHANGED_PLUGINS" > submodules.json
           cat submodules.json
 
           echo "submodule-matrix=$(cat submodules.json)" >> $GITHUB_OUTPUT
