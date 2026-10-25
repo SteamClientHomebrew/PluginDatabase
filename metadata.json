@@ -136,8 +136,9 @@
   },
   {
     "id": "70961284c21341e34d5c7b553cadaf2e3b5de9d6",
-    "commitId": "ee57e92f9fe4f058082f8eb35b8ccbb2437cf4be",
-    "format": "loose"
+    "commitId": "e136b15313d5f17053998726951d471d1b5f8975",
+    "format": "star",
+    "pluginId": "steam-change-window-params"
   },
   {
     "id": "a8f305c0bcdbe3b7fd473d2f59c4e8b8b067c648",
