@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/steam-ai-disclosure-filter"]
+	path = plugins/steam-ai-disclosure-filter
+	url = https://github.com/ZaneDragonBorn/steam-ai-disclosure-filter.git
