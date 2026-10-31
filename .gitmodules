@@ -109,3 +109,6 @@
 [submodule "plugins/deadlock_stats"]
 	path = plugins/deadlock_stats
 	url = https://github.com/iking2022/millennium-deadlock-stats
+[submodule "plugins/quick_friends_actions"]
+	path = plugins/quick_friends_actions
+	url = https://github.com/iking2022/millennium-quick-friends-actions
