@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/steam-custom-achievements"]
+	path = plugins/steam-custom-achievements
+	url = https://github.com/GNRRaiser/Steam-Custom-Achievements
