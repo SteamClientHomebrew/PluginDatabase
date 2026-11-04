@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/steam-controller-battery"]
+	path = plugins/steam-controller-battery
+	url = https://github.com/The-GothamKnight/steam-controller-battery.git
