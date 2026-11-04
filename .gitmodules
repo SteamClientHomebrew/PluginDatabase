@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/steam-delisted-images"]
+	path = plugins/steam-delisted-images
+	url = https://github.com/SergeySamarin/steam-delisted-images
