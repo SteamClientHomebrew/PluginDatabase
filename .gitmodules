@@ -106,3 +106,6 @@
 [submodule "plugins/recent-chats"]
 	path = plugins/recent-chats
 	url = https://github.com/Alex979/Steam-Recent-Chats-plugin
+[submodule "plugins/universal-game-importer"]
+	path = plugins/universal-game-importer
+	url = https://github.com/GFocacetti/universal-game-importer
