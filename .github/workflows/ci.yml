@@ -141,9 +141,13 @@ jobs:
           name: build-scripts
           path: scripts/build/
 
+      - name: Set up Rust
+        if: steps.format.outputs.format == 'star'
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Install starlight
         if: steps.format.outputs.format == 'star'
-        run: npm install -g @steambrew/starlight@${{ vars.STARLIGHT_VERSION }}
+        run: bash ./scripts/build/install-starlight.sh
 
       - name: Install pnpm
         if: steps.format.outputs.format != 'star'
