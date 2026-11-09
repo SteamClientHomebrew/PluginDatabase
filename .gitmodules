@@ -109,3 +109,6 @@
 [submodule "plugins/launch-options-shortcut"]
 	path = plugins/launch-options-shortcut
 	url = https://github.com/mdadamson/steam-launch-args-shortcut.git
+[submodule "plugins/steam-proton-universal"]
+	path = plugins/steam-proton-universal
+	url = https://github.com/BlafKing/steam-proton-universal
