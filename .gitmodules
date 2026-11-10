@@ -112,3 +112,6 @@
 [submodule "plugins/ai-generated-content-disclosure-shortcut"]
 	path = plugins/ai-generated-content-disclosure-shortcut
 	url = git@github.com:mdadamson/steam-ai-generated-content-disclosure-shortcut.git
+[submodule "plugins/steam-proton-universal"]
+	path = plugins/steam-proton-universal
+	url = https://github.com/BlafKing/steam-proton-universal
