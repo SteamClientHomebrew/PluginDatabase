@@ -109,3 +109,6 @@
 [submodule "plugins/steam-proton-universal"]
 	path = plugins/steam-proton-universal
 	url = https://github.com/BlafKing/steam-proton-universal
+[submodule "plugins/pc-info"]
+	path = plugins/pc-info
+	url = https://github.com/LUCKMERyt/pc-info-Millennium
