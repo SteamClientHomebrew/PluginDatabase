@@ -75,6 +75,4 @@ jobs:
           fi
 
           gh pr comment "$PR_NUMBER" --repo "$REPO" --body "This pull request was closed because the plugin failed to build. See the [build log]($RUN_URL) for details. Push a fix, then comment \`@millennium-bot[bot] reopen\` on this pull request to reopen it and retry the build.
-
-<!-- build-gate-sha: $head_sha -->"
           gh pr close "$PR_NUMBER" --repo "$REPO"
