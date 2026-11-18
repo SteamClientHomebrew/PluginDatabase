@@ -1,0 +1,106 @@
+name: PR Reopen Bot
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  reopen:
+    runs-on: ubuntu-latest
+    if: github.event.issue.pull_request != null && github.event.comment.user.type != 'Bot'
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Check for trigger phrase
+        id: trigger
+        env:
+          COMMENT_BODY: ${{ github.event.comment.body }}
+        run: |
+          set -euo pipefail
+
+          if echo "$COMMENT_BODY" | grep -qiE '@millennium-bot(\[bot\])?[[:space:]]+reopen'; then
+            echo "matched=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "matched=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate bot token
+        id: app-token
+        if: steps.trigger.outputs.matched == 'true'
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.MILLENNIUM_BOT_APP_ID }}
+          private-key: ${{ secrets.MILLENNIUM_BOT_PRIVATE_KEY }}
+
+      - name: Handle reopen request
+        if: steps.trigger.outputs.matched == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          COMMENTER: ${{ github.event.comment.user.login }}
+        run: |
+          set -euo pipefail
+
+          pr_json=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json state,headRefOid,author)
+          state=$(echo "$pr_json" | jq -r '.state')
+          head_sha=$(echo "$pr_json" | jq -r '.headRefOid')
+          pr_author=$(echo "$pr_json" | jq -r '.author.login')
+
+          if [[ "$COMMENTER" != "$pr_author" ]]; then
+            permission=$(gh api "repos/$REPO/collaborators/$COMMENTER/permission" --jq '.permission' 2>/dev/null || echo "none")
+            if [[ "$permission" != "admin" && "$permission" != "write" && "$permission" != "maintain" ]]; then
+              gh pr comment "$PR_NUMBER" --repo "$REPO" --body "Only the pull request author or repository collaborators can request a reopen."
+              exit 0
+            fi
+          fi
+
+          if [[ "$state" == "OPEN" ]]; then
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "This pull request is already open."
+            exit 0
+          fi
+
+          if [[ "$state" == "MERGED" ]]; then
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "This pull request is already merged and can't be reopened."
+            exit 0
+          fi
+
+          close_comment=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
+            --jq '[.[] | select(.body | test("closed because the plugin failed to build"))] | last // empty')
+
+          if [[ -z "$close_comment" ]]; then
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "This pull request wasn't closed by the automated build check, so it can't be reopened this way."
+            exit 0
+          fi
+
+          marker_sha=$(echo "$close_comment" | jq -r '.body' \
+            | grep -oE 'build-gate-sha: [0-9a-f]{40}' | tail -n1 | awk '{print $2}' || true)
+
+          if [[ -n "$marker_sha" ]]; then
+            # Modern close comments record the exact failing SHA, so compare precisely.
+            if [[ "$marker_sha" == "$head_sha" ]]; then
+              changed=false
+            else
+              changed=true
+            fi
+          else
+            # Older close comments predate the SHA marker, so fall back to timestamps:
+            # has anything been pushed to the branch since this PR was closed?
+            close_time=$(echo "$close_comment" | jq -r '.created_at')
+            commit_time=$(gh api "repos/$REPO/commits/$head_sha" --jq '.commit.committer.date')
+
+            if [[ "$commit_time" > "$close_time" ]]; then
+              changed=true
+            else
+              changed=false
+            fi
+          fi
+
+          if [[ "$changed" != "true" ]]; then
+            gh pr comment "$PR_NUMBER" --repo "$REPO" --body "No changes have been pushed since this pull request was closed. Push a fix, then comment \`@millennium-bot[bot] reopen\` again."
+            exit 0
+          fi
+
+          gh pr reopen "$PR_NUMBER" --repo "$REPO"
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "Reopened — new commits were found since the build failure. The build will run again."
