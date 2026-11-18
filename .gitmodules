@@ -109,3 +109,6 @@
 [submodule "plugins/universal-game-importer"]
 	path = plugins/universal-game-importer
 	url = https://github.com/GFocacetti/universal-game-importer
+[submodule "plugins/steam-proton-universal"]
+	path = plugins/steam-proton-universal
+	url = https://github.com/BlafKing/steam-proton-universal
