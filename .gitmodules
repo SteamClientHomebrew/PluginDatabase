@@ -109,3 +109,6 @@
 [submodule "plugins/steam-proton-universal"]
 	path = plugins/steam-proton-universal
 	url = https://github.com/BlafKing/steam-proton-universal
+[submodule "plugins/achievement-translator"]
+	path = plugins/achievement-translator
+	url = https://github.com/SaiyajinK/Achievement-Translator-for-Steam.git
