@@ -109,3 +109,6 @@
 [submodule "plugins/steam-proton-universal"]
 	path = plugins/steam-proton-universal
 	url = https://github.com/BlafKing/steam-proton-universal
+[submodule "plugins/game-icons-reload"]
+	path = plugins/game-icons-reload
+	url = https://github.com/mbahri-dev/steam-game-icons-reload.git
