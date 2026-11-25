@@ -109,3 +109,6 @@
 [submodule "plugins/steam-proton-universal"]
 	path = plugins/steam-proton-universal
 	url = https://github.com/BlafKing/steam-proton-universal
+[submodule "plugins/playbox"]
+	path = plugins/playbox
+	url = https://github.com/OriginalSwayze/Playbox
