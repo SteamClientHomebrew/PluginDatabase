@@ -109,3 +109,6 @@
 [submodule "plugins/steam-proton-universal"]
 	path = plugins/steam-proton-universal
 	url = https://github.com/BlafKing/steam-proton-universal
+[submodule "plugins/family-owner"]
+	path = plugins/family-owner
+	url = https://github.com/masterbatesai/family-owner
