@@ -109,3 +109,6 @@
 [submodule "plugins/steam-proton-universal"]
 	path = plugins/steam-proton-universal
 	url = https://github.com/BlafKing/steam-proton-universal
+[submodule "plugins/proton-launch-manager"]
+	path = plugins/proton-launch-manager
+	url = https://github.com/PedroMachado1/proton-launch-manager
